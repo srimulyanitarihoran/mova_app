@@ -1,30 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mova_app/screens/detail_screen.dart';
 import 'package:mova_app/widgets/filter_bottom_sheets.dart';
 import 'package:mova_app/widgets/movie_card.dart';
 import 'package:mova_app/widgets/search_bar.dart';
 import 'package:mova_app/widgets/selected_filter_chip.dart';
+import 'package:mova_app/widgets/bottom_navbar.dart';
 
 class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({super.key});
+  ExploreScreen({super.key});
 
   @override
   State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
+  int currentIndex = 1;
   List<String> selectedFilters = [];
   String searchQuery = "";
 
   List<Map<String, String>> posters = [
-    {"rating": "9.8", "image": "assets/image/aouad.jpg", "title": "All Of Us Are Dead",},
+    {
+      "rating": "9.8",
+      "image": "assets/image/aouad.jpg",
+      "title": "All Of Us Are Dead",
+    },
     {"rating": "9.7", "image": "assets/image/joker.jpg", "title": "Joker"},
     {"rating": "9.6", "image": "assets/image/megan.jpg", "title": "Megan"},
-    {"rating": "9.6", "image": "assets/image/parasite.jpg", "title": "Parasite"},
-    {"rating": "9.6", "image": "assets/image/spiderman.jpg", "title": "Spiderman"},
+    {
+      "rating": "9.6",
+      "image": "assets/image/parasite.jpg",
+      "title": "Parasite",
+    },
+    {
+      "rating": "9.6",
+      "image": "assets/image/spiderman.jpg",
+      "title": "Spiderman",
+    },
     {"rating": "9.6", "image": "assets/image/stalker.jpg", "title": "Stalker"},
     {"rating": "9.6", "image": "assets/image/tangled.jpg", "title": "Tangled"},
-    {"rating": "9.6", "image": "assets/image/tlou.jpg", "title": "The Last Of Us"},
+    {
+      "rating": "9.6",
+      "image": "assets/image/tlou.jpg",
+      "title": "The Last Of Us",
+    },
     {"rating": "9.6", "image": "assets/image/cargo.jpg", "title": "Cargo"},
     {"rating": "9.6", "image": "assets/image/dune.jpg", "title": "Dune"},
   ];
@@ -55,7 +74,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }).toList();
 
     return Scaffold(
-      backgroundColor:Color(0xFF0E0E10),
+      backgroundColor: Color(0xFF0E0E10),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -90,7 +109,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(height: 8),
@@ -116,9 +135,23 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           childAspectRatio: 0.67,
                         ),
                         itemBuilder: (_, i) {
-                          return MovieCard(
-                            rating: filtered[i]["rating"]!,
-                            imagePath: filtered[i]["image"]!,
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => DetailScreen(
+                                    title: filtered[i]["title"]!,
+                                    image: filtered[i]["image"]!,
+                                    rating: filtered[i]["rating"]!,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: MovieCard(
+                              rating: filtered[i]["rating"]!,
+                              imagePath: filtered[i]["image"]!,
+                            ),
                           );
                         },
                       ),
@@ -127,6 +160,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavbar(currentIndex: currentIndex),
     );
   }
 }

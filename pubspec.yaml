@@ -63,6 +63,7 @@ flutter:
   assets:
     - assets/lottie/error.json
     - assets/image/
+    - assets/lottie/emptyred.json
     - assets/image/Joker.jpg
     - assets/image/aouad.jpg
     - assets/image/megan.jpg
