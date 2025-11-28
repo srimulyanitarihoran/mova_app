@@ -52,9 +52,7 @@ class _MyListScreenState extends State<MyListScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               SizedBox(height: 10),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -160,11 +158,13 @@ class _MyListScreenState extends State<MyListScreen> {
   }
 
   Widget _buildEmpty() {
-    return Center(
+  return Center(
+    child: SingleChildScrollView(  
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset("assets/lottie/emptyred.json", width: 230, height: 230),
+          Lottie.asset("assets/lottie/emptyred.json", width: 200),
           SizedBox(height: 14),
           Text(
             "No Results",
@@ -186,8 +186,10 @@ class _MyListScreenState extends State<MyListScreen> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   Widget _buildGrid(List<Map<String, String>> list) {
     return GridView.builder(
